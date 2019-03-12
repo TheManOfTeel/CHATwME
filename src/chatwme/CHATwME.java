@@ -22,7 +22,7 @@ public class CHATwME {
      */
     public static void main(String[] args) {
         if (args.length != 2){
-            System.out.println("Two arguments are required: <multicast host> <port number>"); //checks to see if the base requirements are met to start chat
+            System.out.println("You must specify a host and port number."); //checks to see if the base requirements are met to start chat
         }
         else {
             try {
@@ -101,7 +101,7 @@ public class CHATwME {
             } 
             catch(IOException e) 
             { 
-                System.out.println("Socket closed!"); 
+                System.out.println("The socket has been closed."); 
             } 
         } 
     }
