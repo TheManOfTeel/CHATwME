@@ -1,0 +1,3 @@
+cd documents/NetBeansProjects/CHATwME/src/chatwme
+java CHATwMe.java 239.0.0.0 1234
+java CHATwMe.java 98.209.8.31 4958
