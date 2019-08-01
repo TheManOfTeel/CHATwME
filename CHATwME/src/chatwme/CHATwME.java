@@ -76,41 +76,37 @@ public class CHATwME {
             }
         }
     }
-    static class ReadThread implements Runnable { 
-    private MulticastSocket socket; 
-    private InetAddress group; 
-    private int port; 
-    private static final int MAX_LEN = 1000; //Max length
-    ReadThread(MulticastSocket socket,InetAddress group,int port) 
-    { 
-        this.socket = socket; 
-        this.group = group; 
-        this.port = port; 
-    } 
-      
-    @Override
-    public void run() 
-    { 
-        while(!CHATwME.finished) //When not finished
-        { 
-                byte[] buffer = new byte[ReadThread.MAX_LEN]; 
-                DatagramPacket datagram = new
-                DatagramPacket(buffer,buffer.length,group,port); 
-                String message;
-            try //Do what is intended
-            { 
-                socket.receive(datagram); 
-                message = new
-                String(buffer,0,datagram.getLength(),"UTF-8"); 
-                if(!message.startsWith(CHATwME.name)){ 
-                    System.out.println(message);
+    static class ReadThread implements Runnable {
+        private MulticastSocket socket; 
+        private InetAddress group; 
+        private int port; 
+        private static final int MAX_LEN = 1000; //Max length
+        ReadThread(MulticastSocket socket,InetAddress group,int port) 
+        {
+            this.socket = socket; 
+            this.group = group; 
+            this.port = port; 
+        }
+        
+        @Override
+        public void run() {
+            while(!CHATwME.finished) { //when not finished 
+                    byte[] buffer = new byte[ReadThread.MAX_LEN]; 
+                    DatagramPacket datagram = new
+                    DatagramPacket(buffer,buffer.length,group,port); 
+                    String message;
+                try { //do what is intended 
+                    socket.receive(datagram); 
+                    message = new
+                    String(buffer,0,datagram.getLength(),"UTF-8"); 
+                    if(!message.startsWith(CHATwME.name)){
+                        System.out.println(message);
+                    }
+                } 
+                catch(IOException e) { //Lets the user know that the socket is closed and chat has ended
+                    System.out.println("The socket has been closed, chat has ended.");
                 }
-            } 
-            catch(IOException e) //Lets the user know that the socket is closed and chat has ended
-            { 
-                System.out.println("The socket has been closed, chat has ended.");
-            } 
-        } 
-    }
+            }
+        }
     }
 }
